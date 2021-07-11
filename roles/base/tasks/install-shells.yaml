@@ -1,0 +1,15 @@
+- name: Install shell packages
+  xbps:
+    package:
+      - bash
+      - bash-completion
+      - dash
+      - oksh
+    state: present
+
+- name: Synchronize shell files
+  vars:
+    dir: shells
+  include_role:
+    name: lib
+    tasks_from: synchronize-files

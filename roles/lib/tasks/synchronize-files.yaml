@@ -1,0 +1,23 @@
+- name: Install system files
+  copy:
+    src: '{{ dir | mandatory }}/rootfs/'
+    dest: /
+    mode: 0644
+
+- name: Ensure directories under /usr/local/ have standard permissions
+  shell: |
+    find /usr/local -type d | xargs -I@ chmod 0755 @
+
+- name: Install system local binaries
+  copy:
+    src: '{{ dir | mandatory }}/rootfs/usr/local/bin/'
+    dest: /usr/local/bin/
+    mode: 0755
+
+- name: Install user files
+  copy:
+    src: '{{ dir | mandatory }}/home/'
+    dest: '/home/{{ user | mandatory }}'
+    mode: 0644
+    owner: '{{ user | mandatory }}'
+    group: '{{ user | mandatory }}'

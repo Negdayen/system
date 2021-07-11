@@ -1,0 +1,90 @@
+- name: Install base tools
+  xbps:
+    package:
+      - abduco
+      - atop
+      - bc
+      - bind-utils
+      - blktrace
+      - bmake
+      - bridge-utils
+      - bwm-ng
+      - coreutils
+      - curl
+      - curlftpfs
+      - dos2unix
+      - dstat
+      - ed
+      - extrace
+      - fdupes
+      - fio
+      - fuse-sshfs
+      - fzy
+      - hdparm
+      - htop
+      - iftop
+      - inetutils-telnet
+      - ioping
+      - iotop
+      - iptables
+      - jq
+      - logtop
+      - lshw
+      - lsof
+      - ltrace
+      - moreutils
+      - nftables
+      - openbsd-netcat
+      - opendoas
+      - openssh
+      - oprofile
+      - outils
+      - p7zip
+      - parallel
+      - patch
+      - patchutils
+      - pciutils
+      - perf
+      - progress
+      - python3
+      - python3-pip
+      - readline
+      - rlwrap
+      - rsync
+      - socat
+      - sqlcipher
+      - sqlite
+      - squashfs-tools
+      - stow
+      - strace
+      - sysfsutils
+      - sysstat
+      - tcpflow
+      - time
+      - unrar
+      - unzip
+      - usbutils
+      - webcat
+      - websocat
+      - wget
+      - xxd
+      - yq
+    state: present
+
+- name: Install csv tools
+  xbps:
+    package:
+      - miller
+      - xsv
+    state: present
+
+- name: Install search tools
+  xbps:
+    package:
+      - ack
+      - ripgrep
+      - the_silver_searcher
+    state: present
+
+- name: Install shells
+  include_tasks: install-shells.yaml

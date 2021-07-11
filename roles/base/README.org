@@ -1,0 +1,3 @@
+The base role specifies a baseline system every node should have.
+
+All software in this role pack a quality usefulness to footprint ratio.

@@ -1,0 +1,8 @@
+This role stores re-usable tasks to be used from other roles.  For example,
+
+#+BEGIN_SRC yaml
+- name: Synchronize rootfs and home files
+  include_role:
+    name: lib
+    tasks_from: synchronize_files
+#+END_SRC
