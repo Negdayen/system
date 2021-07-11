@@ -1,4 +1,13 @@
+# TODO Convert from copy module to synchronize module?
+
+- name: Check for system files
+  local_action:
+    module: stat
+    path: '{{ dir | mandatory }}/rootfs/'
+  register: system_files
+
 - name: Install system files
+  when: system_files.stat.exists == true
   copy:
     src: '{{ dir | mandatory }}/rootfs/'
     dest: /
@@ -8,13 +17,27 @@
   shell: |
     find /usr/local -type d | xargs -I@ chmod 0755 @
 
-- name: Install system local binaries
+- name: Check for local system binaries
+  local_action:
+    module: stat
+    path: '{{ dir | mandatory }}/rootfs/usr/local/bin/'
+  register: system_binaries
+
+- name: Install local system binaries
+  when: system_binaries.stat.exists == true
   copy:
     src: '{{ dir | mandatory }}/rootfs/usr/local/bin/'
     dest: /usr/local/bin/
     mode: 0755
 
+- name: Check for user files
+  local_action:
+    module: stat
+    path: '{{ dir | mandatory }}/home/'
+  register: user_files
+
 - name: Install user files
+  when: user_files.stat.exists == true
   copy:
     src: '{{ dir | mandatory }}/home/'
     dest: '/home/{{ user | mandatory }}'

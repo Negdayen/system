@@ -36,7 +36,9 @@
       - ipafont-fonts-otf
     state: present
 
-- name: Synchronize X11 rootfs
-  synchronize:
-    src: x11/rootfs/
-    dest: /
+- name: Synchronize X11 files
+  vars:
+    dir: x11
+  include_role:
+    name: lib
+    tasks_from: synchronize-files
