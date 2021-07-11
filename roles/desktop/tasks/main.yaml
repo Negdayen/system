@@ -1,0 +1,2 @@
+- name: Set up audio system
+  include_tasks: set-up-audio-system.yaml

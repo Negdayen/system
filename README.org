@@ -1,0 +1,10 @@
+#+TITLE: System Provisioning
+#+AUTHOR: Jacob Horrocks
+#+OPTIONS: ^:nil
+#+OPTIONS: \n:t
+
+* Prerequisites
+
+#+BEGIN_SRC sh
+sudo xbps-install -S ansible
+#+END_SRC

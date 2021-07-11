@@ -1,0 +1,7 @@
+- hosts: localhost
+  connection: local
+  vars:
+    user: jacob
+  become: yes
+  roles:
+    - desktop
