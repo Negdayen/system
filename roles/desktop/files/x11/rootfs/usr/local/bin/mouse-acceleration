@@ -1,0 +1,15 @@
+#!/bin/sh -eu
+
+readonly command="${1}"
+readonly device="${2}"
+
+case "${command}" in
+    enable)
+        xinput --set-prop "${device}" 'libinput Accel Profile Enabled' 1, 0
+        ;;
+    disable)
+        xinput --set-prop "${device}" 'libinput Accel Profile Enabled' 0, 1
+        ;;
+    *)
+        exit 1;
+esac

@@ -1,2 +1,5 @@
-- name: Set up audio system
-  include_tasks: set-up-audio-system.yaml
+- name: Install audio system
+  include_tasks: install-audio-system.yaml
+
+- name: Install X11
+  include_tasks: install-x11.yaml
