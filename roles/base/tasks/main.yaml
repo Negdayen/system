@@ -11,7 +11,10 @@
   xbps:
     package:
       - abduco
+      - acpid
       - atop
+      - base-files
+      - bash
       - bc
       - bind-utils
       - blktrace
@@ -21,11 +24,18 @@
       - coreutils
       - curl
       - curlftpfs
+      - dhcpcd
       - dos2unix
+      - dosfstools
       - dstat
+      - e2fsprogs
       - ed
+      - ethtool
+      - eudev
       - extrace
+      - f2fs-tools
       - fdupes
+      - file
       - fio
       - fuse-sshfs
       - fzy
@@ -35,16 +45,30 @@
       - inetutils-telnet
       - ioping
       - iotop
+      - iproute2
       - iptables
+      - iputils
+      - iw
+      - iwd
       - jq
+      - kbd
+      - kmod
+      - less
+      - libgcc
+      - linux
       - logtop
       - lshw
       - lsof
       - ltrace
+      - lvm2
+      - man-pages
+      - mdocml
       - moreutils
+      - ncurses
       - nftables
       - openbsd-netcat
       - opendoas
+      - openntpd
       - openssh
       - oprofile
       - outils
@@ -61,21 +85,29 @@
       - rlwrap
       - rsync
       - socat
+      - socklog
+      - socklog-void
       - sqlcipher
       - sqlite
       - squashfs-tools
       - stow
       - strace
+      - sudo
       - sysfsutils
+      - syslinux
       - sysstat
       - tcpflow
       - time
+      - traceroute
+      - tree
       - unrar
       - unzip
       - usbutils
       - webcat
       - websocat
       - wget
+      - wifi-firmware
+      - xtools
       - xxd
       - yq
     state: present
