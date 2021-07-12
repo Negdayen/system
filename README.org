@@ -12,5 +12,5 @@ sudo xbps-install -S ansible
 * Example usage
 
 #+BEGIN_SRC sh
-ansible-playbook -e @.cache/my-desktop-vars.yaml ./provision-my-local-system.yaml
+ansible-playbook -e @.cache/my-desktop-vars.yaml ./provision-local-system.yaml
 #+END_SRC
