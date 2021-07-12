@@ -113,10 +113,10 @@
     state: present
 
 - name: Enable base system services
-  file:
-    path: '/etc/runit/runsvdir/default/{{ item }}'
-    src: '/etc/sv/{{ item }}'
-    state: link
+  runit:
+    name: '{{ item }}'
+    enabled: yes
+    state: started
   with_items:
     - dbus
     - dhcpcd
