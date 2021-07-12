@@ -1,0 +1,9 @@
+#!/bin/sh -eu
+#
+# Print a random page number for a given pdf
+
+readonly pdf="${1}"
+
+which mutool
+
+shuf -i 1-$(mutool info "${pdf}" | awk '/Pages:/ {print $2}') -n 1

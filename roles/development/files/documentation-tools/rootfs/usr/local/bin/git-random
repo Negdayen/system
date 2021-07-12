@@ -1,0 +1,3 @@
+#!/bin/sh -eu
+
+git log --pretty=oneline "$@" | awk '{print $1}' | shuf -n1

@@ -1,0 +1,9 @@
+#!/bin/sh -eu
+#
+# View a random page for a given pdf
+
+readonly pdf="${1}"
+
+which zathura
+
+zathura --page=$(pdf-random-page-number "${pdf}") "${pdf}"

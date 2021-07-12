@@ -1,0 +1,9 @@
+#!/bin/sh -eu
+#
+# man-section "${MAN_SECTION_NUM}"
+# Displays all topics in the given MAN_SECTION_NUM
+
+readonly section="${1}"
+
+# GNU man-db: apropos -s "${1}" ".*"
+apropos -s "${1}" "~.*"

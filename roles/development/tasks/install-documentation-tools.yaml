@@ -1,0 +1,23 @@
+- name: Install documentation tools packages
+  xbps:
+    package:
+      - chmlib
+      - doxygen
+      - gnuplot
+      - mupdf
+      - mupdf-tools
+      - pandoc
+      - texinfo
+      - texlive
+      - zathura
+      - zathura-djvu
+      - zathura-pdf-mupdf
+      - zathura-ps
+    state: present
+
+- name: Synchronize documentation tools files
+  vars:
+    dir: documentation-tools
+  include_role:
+    name: lib
+    tasks_from: synchronize-files
