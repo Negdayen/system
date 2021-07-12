@@ -8,3 +8,9 @@
 #+BEGIN_SRC sh
 sudo xbps-install -S ansible
 #+END_SRC
+
+* Example usage
+
+#+BEGIN_SRC sh
+ansible-playbook -e @.cache/my-desktop-vars.yaml ./provision-my-local-system.yaml
+#+END_SRC
