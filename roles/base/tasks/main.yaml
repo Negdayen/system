@@ -97,3 +97,8 @@
 
 - name: Install shells
   include_tasks: install-shells.yaml
+
+- name: Permit non-root users to use ping
+  capabilities:
+    path: /bin/iputils-ping
+    capability: cap_net_raw+ep
