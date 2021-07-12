@@ -29,6 +29,11 @@
       - xwininfo
     state: present
 
+- name: Install fonts
+  xbps:
+    package: dejavu-fonts-ttf
+    state: present
+
 - name: Install Hiragana, Katakana, Kanji fonts
   xbps:
     package:
