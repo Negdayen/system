@@ -1,0 +1,83 @@
+- name: Install virtualization packages
+  xbps:
+    package:
+      - buildah
+      - libvirt-devel
+      - k3s
+      - kubernetes-helm
+      - podman
+      - qemu
+    state: present
+
+- name: Install container image registry configuration
+  copy:
+    dest: /etc/containers/registries.conf
+    group: root
+    mode: 0644
+    owner: root
+    src: registries.conf
+
+- name: Enable virtualization services
+  runit:
+    name: '{{ item }}'
+    enabled: yes
+    state: started
+  with_items:
+    - libvirtd
+    - virtlockd
+    - virtlogd
+
+- name: Enable k3s-server
+  when: enable_k3s_server
+  runit:
+    name: k3s-server
+    enabled: yes
+    state: started
+
+- name: Install k3s command aliases
+  copy:
+    dest: /usr/local/bin/
+    mode: 0755
+    src: k3s-commands/
+
+- name: Remove uninteresting QEMU files
+  file:
+    path: '/usr/bin/{{ item }}'
+    state: absent
+  with_items:
+    - qemu-alpha
+    - qemu-cris
+    - qemu-hppa
+    - qemu-nios2
+    - qemu-microblaze
+    - qemu-microblazeel
+    - qemu-riscv32
+    - qemu-riscv64
+    - qemu-sh4
+    - qemu-sh4eb
+    - qemu-sparc
+    - qemu-sparc32plus
+    - qemu-sparc64
+    - qemu-xten
+    - qemu-xten
+    - qemu-system-unicore32
+    - qemu-system-moxie
+    - qemu-system-nios2
+    - qemu-system-or1k
+    - qemu-system-cris
+    - qemu-system-microblaze
+    - qemu-system-microblazeel
+    - qemu-system-tricore
+    - qemu-system-lm32
+    - qemu-system-m68k
+    - qemu-system-riscv32
+    - qemu-system-riscv64
+    - qemu-system-sparc
+    - qemu-system-s390x
+    - qemu-system-xtensa
+    - qemu-system-xtensaeb
+    - qemu-system-alpha
+    - qemu-system-hppa
+    - qemu-system-sh4
+    - qemu-system-sh4eb
+    - qemu-system-sparc64
