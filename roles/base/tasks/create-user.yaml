@@ -1,0 +1,20 @@
+- name: Create personal user
+  user:
+    name: '{{ user | mandatory }}'
+    password: '{{ user_password }}'
+    groups:
+      - cdrom
+      - dialout
+      - input
+      - kvm
+      - optical
+      - socklog
+      - video
+      - wheel
+      - xbuilder
+    shell: /bin/bash
+
+- name: Add personal user to sudoers
+  lineinfile:
+    path: /etc/sudoers
+    line: '{{ user | mandatory }} ALL=(ALL) NOPASSWD: ALL'

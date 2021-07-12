@@ -1,4 +1,13 @@
-- name: Install base tools
+- name: Create personal user
+  include_tasks: create-user.yaml
+
+- name: Install non-free xbps repository
+  xbps:
+    package: void-repo-nonfree
+    state: present
+
+# TODO This list of packages could probably be broken up some.
+- name: Install base system packages
   xbps:
     package:
       - abduco

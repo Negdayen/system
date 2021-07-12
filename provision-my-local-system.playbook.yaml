@@ -2,6 +2,12 @@
   connection: local
   vars:
     user: jacob
+  vars_prompt:
+    - name: 'user_password'
+      prompt: 'Enter password for {{ user | mandatory }}'
+      encrypt: 'sha512_crypt'
+      private: yes
+      unsafe: yes
   become: yes
   roles:
     - base
