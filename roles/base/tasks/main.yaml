@@ -112,6 +112,17 @@
       - yq
     state: present
 
+- name: Enable base system services
+  file:
+    path: '/etc/runit/runsvdir/default/{{ item }}'
+    src: '/etc/sv/{{ item }}'
+    state: link
+  with_items:
+    - dbus
+    - dhcpcd
+    - iwd
+    - openntpd
+
 - name: Install csv tools
   xbps:
     package:
