@@ -110,6 +110,7 @@
       - xtools
       - xxd
       - yq
+      - zip
     state: present
 
 - name: Enable base system services
