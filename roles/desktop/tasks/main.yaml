@@ -3,3 +3,9 @@
 
 - name: Install X11
   include_tasks: install-x11.yaml
+
+- name: Install Signal Private Messenger
+  xbps:
+    package:
+      - Signal-Desktop
+    state: present
