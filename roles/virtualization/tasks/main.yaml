@@ -17,6 +17,71 @@
     owner: root
     src: registries.conf
 
+- name: Create K3s configuration directory
+  file:
+    group: root
+    mode: 0755
+    owner: root
+    path: /etc/k3s/
+    state: directory
+
+- name: Install K3s configuration
+  copy:
+    dest: /etc/k3s/config
+    group: root
+    mode: 0644
+    owner: root
+    src: k3s.conf
+
+- name: Create root kubectl configuration directory
+  file:
+    group: root
+    mode: 0755
+    owner: root
+    path: /root/.kube
+    state: directory
+
+- name: Install root kubectl config
+  copy:
+    dest: '/root/.kube/config'
+    group: root
+    mode: 0644
+    owner: root
+    src: /etc/rancher/k3s/k3s.yaml
+
+- name: Create user kubectl configuration directory
+  file:
+    group: '{{ user | mandatory }}'
+    mode: 0755
+    owner: '{{ user | mandatory }}'
+    path: '/home/{{ user | mandatory }}/.kube'
+    state: directory
+
+- name: Install user kubectl config
+  copy:
+    dest: '/home/{{ user | mandatory }}/.kube/config'
+    group: '{{ user | mandatory }}'
+    mode: 0644
+    owner: '{{ user | mandatory }}'
+    src: /etc/rancher/k3s/k3s.yaml
+
+- name: Add ingress-nginx Helm Chart Repository
+  kubernetes.core.helm_repository:
+    repo_name: ingress-nginx
+    repo_url: https://kubernetes.github.io/ingress-nginx
+
+- name: Start k3s-server
+  runit:
+    name: k3s-server
+    state: started
+
+- name: Deploy ingress-nginx
+  kubernetes.core.helm:
+    chart_ref: ingress-nginx/ingress-nginx
+    release_name: nginx-ingress
+    release_namespace: kube-system
+    update_repo_cache: true
+
 - name: Enable virtualization services
   runit:
     name: '{{ item }}'
@@ -26,6 +91,13 @@
     - libvirtd
     - virtlockd
     - virtlogd
+
+- name: Disable k3s-server
+  when: not enable_k3s_server
+  runit:
+    name: k3s-server
+    enabled: no
+    state: stopped
 
 - name: Enable k3s-server
   when: enable_k3s_server
