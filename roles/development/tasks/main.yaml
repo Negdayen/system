@@ -1,2 +1,5 @@
 - name: Install documentation tools
-  include_tasks: install-documentation-tools.yaml
+  import_tasks: install-documentation-tools.yaml
+
+- name: Provision python development environment
+  import_tasks: provision-python-development-environment.yaml

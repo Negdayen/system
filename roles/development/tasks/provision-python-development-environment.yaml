@@ -1,0 +1,12 @@
+- name: Install python development package
+  xbps:
+    package:
+      python3-devel
+
+# https://github.com/python-lsp/python-lsp-server
+- name: Install python-lsp-server
+  pip:
+    executable: pip
+    name:
+      - python-lsp-server
+      - python-lsp-server[all]
