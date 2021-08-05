@@ -3,3 +3,11 @@
 
 - name: Provision python development environment
   import_tasks: provision-python-development-environment.yaml
+
+- name: Provision emacs
+  import_tasks: provision-emacs.yaml
+
+- name: git clone my notes
+  git:
+    dest: '/home/{{ user | mandatory }}/notes'
+    repo: 'https://github.com/Negdayen/notes.git'
