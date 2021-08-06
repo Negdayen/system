@@ -14,3 +14,17 @@ sudo xbps-install -S ansible
 #+BEGIN_SRC sh
 ansible-playbook -e @.cache/my-desktop-vars.yaml ./provision-local-system.yaml
 #+END_SRC
+
+* Troubleshooting
+
+** Failures during package install that don't make sense
+
+I.E., you get an error when running the playbook about xbps being unable to install a
+package even though xbps-install "${package}" works fine.  In this case, the package
+producing the error may not be the one that is reported by ansible.  The most likely
+scenario is you need to update your system due to a version conflict in your existing
+packages.
+
+#+BEGIN_SRC sh
+xbps-install -Su
+#+END_SRC
