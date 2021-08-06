@@ -1,6 +1,3 @@
-- name: Create personal user
-  include_tasks: create-user.yaml
-
 - name: Install non-free xbps repository
   xbps:
     package: void-repo-nonfree
@@ -112,6 +109,9 @@
       - yq
       - zip
     state: present
+
+- name: Create personal user
+  include_tasks: create-user.yaml
 
 - name: Enable base system services
   runit:
