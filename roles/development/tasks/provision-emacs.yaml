@@ -6,6 +6,8 @@
 - name: Install other text editing packages
   xbps:
     package:
+      - aspell
+      - aspell-en
       - dict
       - yank
 
