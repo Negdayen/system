@@ -1,7 +1,8 @@
-- name: Install emacs package
+- name: Install necessary packages for emacs
   xbps:
     package:
       - emacs-x11
+      - gnupg2
 
 - name: Install other text editing packages
   xbps:
