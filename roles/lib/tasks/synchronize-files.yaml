@@ -1,46 +1,48 @@
-# TODO Convert from copy module to synchronize module?
+- name: Define path
+  local_action:
+    module: command
+    cmd: "printf '{{ ansible_parent_role_paths[0] }}/files/{{ dir | mandatory }}'"
+  register: path
 
 - name: Check for system files
   local_action:
     module: stat
-    path: '{{ dir | mandatory }}/rootfs/'
+    path: '{{ path.stdout }}/rootfs/'
   register: system_files
 
 - name: Install system files
   when: system_files.stat.exists == true
-  copy:
-    src: '{{ dir | mandatory }}/rootfs/'
+  become: yes
+  synchronize:
+    src: '{{ path.stdout }}/rootfs/'
     dest: /
-    mode: 0644
 
 - name: Ensure directories under /usr/local/ have standard permissions
+  become: yes
   shell: |
     find /usr/local -type d | xargs -I@ chmod 0755 @
 
 - name: Check for local system binaries
   local_action:
     module: stat
-    path: '{{ dir | mandatory }}/rootfs/usr/local/bin/'
+    path: '{{ path.stdout }}/rootfs/usr/local/bin/'
   register: system_binaries
 
 - name: Install local system binaries
   when: system_binaries.stat.exists == true
-  copy:
-    src: '{{ dir | mandatory }}/rootfs/usr/local/bin/'
+  become: yes
+  synchronize:
+    src: '{{ path.stdout }}/rootfs/usr/local/bin/'
     dest: /usr/local/bin/
-    mode: 0755
 
 - name: Check for user files
   local_action:
     module: stat
-    path: '{{ dir | mandatory }}/home/'
+    path: '{{ path.stdout }}/home/'
   register: user_files
 
 - name: Install user files
   when: user_files.stat.exists == true
-  copy:
-    src: '{{ dir | mandatory }}/home/'
-    dest: '/home/{{ user | mandatory }}'
-    mode: 0644
-    owner: '{{ user | mandatory }}'
-    group: '{{ user | mandatory }}'
+  synchronize:
+    src: '{{ path.stdout }}/home/'
+    dest: '/home/{{ user | mandatory }}/'
