@@ -51,12 +51,9 @@
     path: /etc/rancher/k3s/k3s.yaml
 
 - name: Install root kubectl config
-  copy:
-    dest: '/root/.kube/config'
-    group: root
-    mode: 0644
-    owner: root
-    src: /etc/rancher/k3s/k3s.yaml
+  become: yes
+  command: |
+    install -o root -g root -m '0600' '/etc/rancher/k3s/k3s.yaml' '/root/.kube/config'
 
 - name: Create user kubectl configuration directory
   file:
@@ -67,12 +64,13 @@
     state: directory
 
 - name: Install user kubectl config
-  copy:
-    dest: '/home/{{ user | mandatory }}/.kube/config'
-    group: '{{ user | mandatory }}'
-    mode: 0644
-    owner: '{{ user | mandatory }}'
-    src: /etc/rancher/k3s/k3s.yaml
+  become: yes
+  command: |
+    install -o '{{ user | mandatory }}' \
+            -g '{{ user | mandatory }}' \
+            -m '0600'
+            '/etc/rancher/k3s/k3s.yaml' \
+            '/home/{{ user | mandatory }}/.kube/config'
 
 - name: Add ingress-nginx Helm Chart Repository
   kubernetes.core.helm_repository:
