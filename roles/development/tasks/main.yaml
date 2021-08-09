@@ -1,10 +1,10 @@
 - name: Install documentation tools
   import_tasks: install-documentation-tools.yaml
 
-- name: Provision python development environment
+- name: Provision Python development environment
   import_tasks: provision-python-development-environment.yaml
 
-- name: Provision emacs
+- name: Provision Emacs
   import_tasks: provision-emacs.yaml
 
 - name: git clone my notes

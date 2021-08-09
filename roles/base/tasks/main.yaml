@@ -113,7 +113,7 @@
     state: present
 
 - name: Create personal user
-  include_tasks: create-user.yaml
+  import_tasks: create-user.yaml
 
 - name: Enable base system services
   become: yes
@@ -145,7 +145,7 @@
     state: present
 
 - name: Install shells
-  include_tasks: install-shells.yaml
+  import_tasks: install-shells.yaml
 
 - name: Permit non-root users to use ping
   become: yes

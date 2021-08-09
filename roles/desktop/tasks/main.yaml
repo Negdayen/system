@@ -1,8 +1,8 @@
 - name: Install audio system
-  include_tasks: install-audio-system.yaml
+  import_tasks: install-audio-system.yaml
 
 - name: Install X11
-  include_tasks: install-x11.yaml
+  import_tasks: install-x11.yaml
 
 - name: Install Signal Private Messenger
   become: yes
