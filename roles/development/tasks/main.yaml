@@ -1,6 +1,9 @@
 - name: Install documentation tools
   import_tasks: install-documentation-tools.yaml
 
+- name: Provision mail environment
+  import_tasks: provision-mail-environment.yaml
+
 - name: Provision Python development environment
   import_tasks: provision-python-development-environment.yaml
 

@@ -1,0 +1,19 @@
+# man notmuch-config
+
+[database]
+# path defaut is "${HOME}/mail"
+
+[user]
+# TODO Make this configurable through Ansible?
+name=Jacob Horrocks
+primary_email=jacob.horrocks@gmail.com
+
+[new]
+tags=unread;inbox;
+ignore=
+
+[search]
+exclude_tags=deleted;spam;
+
+[maildir]
+synchronize_flags=true

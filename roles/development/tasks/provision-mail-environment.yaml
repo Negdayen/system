@@ -1,0 +1,47 @@
+- name: Install mail packages
+  become: yes
+  xbps:
+    package:
+      - gnupg
+      - gnupg2
+      - mb2md
+      - notmuch
+
+- name: Create Maildir directory structure
+  file:
+    group: '{{ user }}'
+    mode: 0755
+    owner: '{{ user }}'
+    path: '/home/{{ user }}/{{ item }}'
+    state: directory
+  with_items:
+    - mail
+    - mail/cur
+    - mail/new
+    - mail/tmp
+    - Downloads
+    - Downloads/mbox
+
+- name: Synchronize mail files
+  vars:
+    dir: mail
+  include_role:
+    name: lib
+    tasks_from: synchronize-files
+
+# Reference: https://notmuchmail.org/howto/#index7h2
+
+- name: Download all MBox and import into Maildir
+  loop:
+    - filepath: '/home/{{ user }}/Downloads/mbox/enet-discuss.mbox'
+      url: 'http://lists.cubik.org/pipermail/enet-discuss.mbox/enet-discuss.mbox'
+    - filepath: '/home/{{ user }}/Downloads/mbox/gambit-list.mbox'
+      url: 'http://mailman.iro.umontreal.ca/pipermail/gambit-list.mbox/gambit-list.mbox'
+  shell: |
+    if ! test -f '{{ item.filepath }}'; then
+        curl -o '{{ item.filepath }}' '{{ item.url }}'
+    fi
+    mb2md -s '{{ item.filepath }}' -d '/home/{{ user }}/mail'
+
+- name: Add new mail to notmuch database
+  command: notmuch new
