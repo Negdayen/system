@@ -39,7 +39,7 @@
       url: 'http://mailman.iro.umontreal.ca/pipermail/gambit-list.mbox/gambit-list.mbox'
   shell: |
     if ! test -f '{{ item.filepath }}'; then
-        curl -o '{{ item.filepath }}' '{{ item.url }}'
+        curl -L -o '{{ item.filepath }}' '{{ item.url }}'
     fi
     mb2md -s '{{ item.filepath }}' -d '/home/{{ user }}/mail'
 
