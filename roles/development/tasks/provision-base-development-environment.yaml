@@ -1,0 +1,7 @@
+- name: Install base development packages
+  become: yes
+  xbps:
+    package:
+      - base-devel
+      - git
+      - git-filter-repo
