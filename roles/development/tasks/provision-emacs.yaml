@@ -1,10 +1,12 @@
 - name: Install necessary packages for emacs
+  become: yes
   xbps:
     package:
       - emacs-x11
       - gnupg2
 
 - name: Install other text editing packages
+  become: yes
   xbps:
     package:
       - aspell

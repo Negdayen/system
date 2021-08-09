@@ -1,10 +1,12 @@
 - name: Install non-free xbps repository
+  become: yes
   xbps:
     package: void-repo-nonfree
     state: present
 
 # TODO This list of packages could probably be broken up some.
 - name: Install base system packages
+  become: yes
   xbps:
     package:
       - abduco
@@ -114,6 +116,7 @@
   include_tasks: create-user.yaml
 
 - name: Enable base system services
+  become: yes
   runit:
     name: '{{ item }}'
     enabled: yes
@@ -125,6 +128,7 @@
     - openntpd
 
 - name: Install csv tools
+  become: yes
   xbps:
     package:
       - miller
@@ -132,6 +136,7 @@
     state: present
 
 - name: Install search tools
+  become: yes
   xbps:
     package:
       - ack
@@ -143,6 +148,7 @@
   include_tasks: install-shells.yaml
 
 - name: Permit non-root users to use ping
+  become: yes
   capabilities:
     path: /bin/iputils-ping
     capability: cap_net_raw+ep

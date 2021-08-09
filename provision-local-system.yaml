@@ -6,7 +6,6 @@
       encrypt: 'sha512_crypt'
       private: yes
       unsafe: yes
-  become: yes
   roles:
     - base
     - desktop

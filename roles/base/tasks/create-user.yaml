@@ -1,4 +1,5 @@
 - name: Create personal user
+  become: yes
   user:
     name: '{{ user | mandatory }}'
     password: '{{ user_password }}'
@@ -15,6 +16,7 @@
     shell: /bin/bash
 
 - name: Add personal user to sudoers
+  become: yes
   lineinfile:
     path: /etc/sudoers
     line: '{{ user | mandatory }} ALL=(ALL) NOPASSWD: ALL'

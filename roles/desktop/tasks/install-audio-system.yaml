@@ -1,16 +1,19 @@
 - name: Install ALSA
+  become: yes
   xbps:
     package:
       - alsa-utils
     state: present
 
 - name: Add user to audio group
+  become: yes
   user:
     name: '{{ user | mandatory }}'
     groups:
       - audio
 
 - name: Enable ALSA service
+  become: yes
   runit:
     name: alsa
     enabled: yes

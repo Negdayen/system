@@ -1,4 +1,5 @@
 - name: Install python development package
+  become: yes
   xbps:
     package:
       python3-devel
