@@ -16,6 +16,17 @@
       - zathura-ps
     state: present
 
+- name: Install pdf-tools.el dependencies
+  become: yes
+  xbps:
+    package:
+      - cairo-devel
+      - libpng-devel
+      - glib-devel
+      - poppler-devel
+      - poppler-glib-devel
+    state: present
+
 - name: Synchronize documentation tools files
   vars:
     dir: documentation-tools
