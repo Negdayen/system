@@ -18,9 +18,3 @@
   git:
     dest: '/home/{{ user | mandatory }}/.emacs.d'
     repo: 'https://github.com/Negdayen/.emacs.d.git'
-
-- name: Fix .emacs.d permissions and user owner
-  shell: |
-    find '/home/{{ user | mandatory }}/.emacs.d/' | xargs -I@ chown {{ user | mandatory }}:{{ user | mandatory }} @
-    find '/home/{{ user | mandatory }}/.emacs.d/' -type d | xargs -I@ chmod 755 @
-    find '/home/{{ user | mandatory }}/.emacs.d/' -type f | xargs -I@ chmod 644 @
