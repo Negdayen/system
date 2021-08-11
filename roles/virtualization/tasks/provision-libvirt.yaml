@@ -1,0 +1,17 @@
+- name: Install libvirt packages
+  become: yes
+  xbps:
+    package:
+      - libvirt-devel
+    state: present
+
+- name: Enable libvirt services
+  become: yes
+  runit:
+    name: '{{ item }}'
+    enabled: yes
+    state: started
+  with_items:
+    - libvirtd
+    - virtlockd
+    - virtlogd
