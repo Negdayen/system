@@ -1,0 +1,13 @@
+- name: Install boot packages
+  become: yes
+  xbps:
+    package:
+      - syslinux
+    state: present
+
+- name: Synchronize boot files
+  vars:
+    dir: boot
+  include_role:
+    name: lib
+    tasks_from: synchronize-files
