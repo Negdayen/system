@@ -1,0 +1,6 @@
+- name: Install freerdp
+  become: yes
+  xbps:
+    package:
+      - freerdp
+    state: present
