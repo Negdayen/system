@@ -2,6 +2,7 @@
   become: yes
   xbps:
     package:
+      - clipmenu
       - disputils
       - hsetroot
       - scrot
