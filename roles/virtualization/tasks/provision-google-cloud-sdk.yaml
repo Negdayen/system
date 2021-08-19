@@ -1,0 +1,24 @@
+- name: Create Google Cloud SDK install directory
+  become: yes
+  file:
+    group: root
+    mode: 0755
+    owner: root
+    path: '/opt/google/'
+    state: directory
+
+- name: Download Google Cloud SDK
+  become: yes
+  unarchive:
+    dest: '/opt/google/google-cloud-sdk'
+    remote_src: yes
+    src: 'https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-353.0.0-linux-x86_64.tar.gz'
+
+- name: Synchronize Google Cloud SDK configuration
+  vars:
+    dir: google-cloud-sdk
+  include_role:
+    name: lib
+    tasks_from: synchronize-files
+
+# Need to interactively run: /opt/google/google-cloud-sdk/bin/gcloud init

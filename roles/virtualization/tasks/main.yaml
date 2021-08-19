@@ -1,3 +1,6 @@
+- name: Provision Google Cloud SDK
+  import_tasks: provision-google-cloud-sdk.yaml
+
 - name: Provision K3s
   import_tasks: provision-k3s.yaml
 
