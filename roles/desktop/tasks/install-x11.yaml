@@ -4,6 +4,7 @@
     package:
       - disputils
       - hsetroot
+      - scrot
       - wmctrl
       - wmutils-core
       - wmutils-opt
