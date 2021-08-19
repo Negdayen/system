@@ -10,3 +10,10 @@
     package:
       - Signal-Desktop
     state: present
+
+- name: Install tool to open files based on MIME type
+  become: yes
+  xbps:
+    package:
+      - run-mailcap
+    state: present
