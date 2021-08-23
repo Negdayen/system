@@ -13,7 +13,16 @@
 - name: Provision Emacs
   import_tasks: provision-emacs.yaml
 
+- name: Make directory for user notes
+  become: yes
+  file:
+    group: '{{ user }}'
+    mode: 0755
+    owner: '{{ user }}'
+    path: '/home/{{ user | mandatory }}/notes/'
+    state: directory
+
 - name: git clone my notes
   git:
-    dest: '/home/{{ user | mandatory }}/notes'
+    dest: '/home/{{ user | mandatory }}/notes/public'
     repo: 'https://github.com/Negdayen/notes.git'
