@@ -97,6 +97,7 @@
       - sudo
       - sysfsutils
       - sysstat
+      - tcpdump
       - tcpflow
       - time
       - traceroute
