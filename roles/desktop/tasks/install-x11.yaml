@@ -2,7 +2,6 @@
   become: yes
   xbps:
     package:
-      - clipmenu
       - disputils
       - hsetroot
       - scrot
@@ -10,7 +9,6 @@
       - wmutils-core
       - wmutils-opt
       - xcalib
-      - xclip
       - xdo
       - xdotool
       - xev
@@ -25,11 +23,20 @@
       - xprop
       - xrandr
       - xrdb
-      - xsel
       - xset
       - xsetroot
       - xtitle
       - xwininfo
+    state: present
+
+- name: Install X11 clipboard packages
+  become: yes
+  xbps:
+    package:
+      - autocutsel
+      - clipmenu
+      - xclip
+      - xsel
     state: present
 
 - name: Install fonts
