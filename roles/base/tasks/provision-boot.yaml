@@ -2,6 +2,7 @@
   become: yes
   xbps:
     package:
+      - rsync
       - syslinux
     state: present
 
