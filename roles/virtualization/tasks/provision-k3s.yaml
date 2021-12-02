@@ -35,6 +35,8 @@
       src: /run/runit/supervise.k3s-agent/
     - path: /etc/sv/k3s-agent/log/supervise
       src: /run/runit/supervise.k3s-agent-log/
+    - path: /var/service/k3s-server
+      src: /etc/sv/k3s-server/
   file:
     follow: no
     force: yes
