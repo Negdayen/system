@@ -44,4 +44,6 @@
     mb2md -s '{{ item.filepath }}' -d '/home/{{ user }}/mail'
 
 - name: Add new mail to notmuch database
+  become: yes
+  become_user: '{{ user | mandatory }}'
   command: notmuch new
